@@ -3,9 +3,9 @@ import PageTitle from '../../components/layout/PageTitle'
 import SectionTitle from '../../components/layout/SectionTitle'
 
 
-function mesclar(s1, s2){
+function mesclar(s1, s2, ativo){
     let textoNaoFormatado = s1+s2
-    let arr1 = s1.split('')
+    let arr1 = [...s1]//s1.split('')
     let arr2 = s2.split('')
     let tam = arr1.length + arr2.length
     // console.log(tam)
@@ -14,7 +14,7 @@ function mesclar(s1, s2){
     let y = 0
 
     for(let i = 0; i < tam; i++){
-        if(i%2 === 0){
+        if((ativo===0)?(i%2 === 0):(i%2 !== 0)){
             if(x < arr1.length) {
                 text.push(arr1[x])
                 x++
@@ -33,6 +33,7 @@ function mesclar(s1, s2){
 const UseRef = (props) => {
     const [value1, setValue1] = useState('')
     const [value2, setValue2] = useState('')
+    const [act, setAct] = useState(0)
     const count = useRef(0)
 
     const myInput1 = useRef(null)
@@ -48,6 +49,7 @@ const UseRef = (props) => {
         myInput1.current.focus()
     }, [value2])
 
+
     return (
         <div className="UseRef">
             <PageTitle
@@ -56,17 +58,29 @@ const UseRef = (props) => {
             />
             <SectionTitle title="Exercício #01"/>
             <div className='center'>
-                <div>
+                <div> 
                     <span className='text'>Valor: </span>
-                    <span className='text'>{mesclar(value1, value2)} [</span>
+                    <span className='text'>{mesclar(value1, value2, act)} [</span>
                     <span className='text red'>{count.current}</span>
                     <span className='text'>]</span>
                 </div>
-                <input type="text" className='input' ref={myInput1} value={value1} onChange={e => setValue1(e.target.value)}/>
+                <input type="text"
+                       className='input' 
+                       ref={myInput1} 
+                       value={value1} 
+                       onChange={e => setValue1(e.target.value)} 
+                       onFocus={_ => {if((value1==='')&&(value2==='')){setAct(0)}}}
+                />
             </div>
             <SectionTitle title="Exercício #02"/>
             <div className='center'>
-                <input type='text' className='input' ref={myInput2} value={value2} onChange={e => setValue2(e.target.value)}/>
+                <input type='text'
+                       className='input'
+                       ref={myInput2}
+                       value={value2}
+                       onChange={e => setValue2(e.target.value)} 
+                       onFocus={_ => {if((value1==='')&&(value2==='')){setAct(1)}}}
+                />
             </div>
         </div>
     )
