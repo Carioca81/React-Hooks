@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 import SectionTitle from '../../components/layout/SectionTitle'
 
-
+// Função mesclar do desafio de UseRef proposto pelo intrutor
 function mesclar(s1, s2, ativo){
     let textoNaoFormatado = s1+s2
     let arr1 = [...s1]//s1.split('')
@@ -33,7 +33,14 @@ function mesclar(s1, s2, ativo){
 const UseRef = (props) => {
     const [value1, setValue1] = useState('')
     const [value2, setValue2] = useState('')
-    const [act, setAct] = useState(0)
+    const [act, setAct] = useState(0) // criado mais um estado para implementar o desafio
+    // Caso act=0 o cursor está no imput de cima e caso act=1 o cursor está no input de baixo
+    // Somado a isso, se as variáveis de estado value1 e value2 estiverem vazias, significa
+    // que a escrita ainda não foi iniciada e, dependendo do valor de act, a lógica da função
+    // mesclar() variará pois dessa forma poderemos iniciar a escrita pelo input de cima ou o de baixo
+    // que a função operará corretamente.
+    // O valor de act será atualizado de acordo aom o evento onFocus programado em cada input.
+    // EXELENTE SOLUÇÃO!!! PARABÉNS MARCELO!!! 
     const count = useRef(0)
 
     const myInput1 = useRef(null)
