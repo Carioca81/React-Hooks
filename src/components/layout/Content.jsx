@@ -11,7 +11,9 @@ import UseCallback from '../../views/examples/UseCallback'
 import UseMemo from '../../views/examples/UseMemo'
 import UseContext from '../../views/examples/UseContext'
 import UseReducer from '../../views/examples/UseReducer'
+import UseReducerDesafio from '../../views/examples/UseReducerDesafio'
 import UseCustom from '../../views/examples/UseCustom'
+
 
 const Content = props => (
     <main className="Content">
@@ -25,6 +27,7 @@ const Content = props => (
             <Route path="/useMemo" element={<UseMemo />}/>
             <Route path="/useContext" element={<UseContext />}/>
             <Route path="/useReducer" element={<UseReducer />}/>
+            <Route path="/useReducerDesafio" element={<UseReducerDesafio />}/>
             <Route path="/useCustom" element={<UseCustom />}/>
             <Route path="*" element={<NotFound />}/>
         </Routes>
